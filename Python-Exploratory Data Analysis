@@ -1,0 +1,153 @@
+import pandas as pd
+import numpy as np
+import seaborn as sn
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from scipy.stats import spearmanr
+import warnings
+warnings.filterwarnings('ignore')
+dfcity = pd.read_csv(r'/Users/philipawala/Downloads/EDA-main/innercity.csv')
+print(dfcity.head()) #gives the first five rows
+print(dfcity.tail()) #gives the last 5 rows
+print(dfcity.shape) #gives the number of rows and columns
+print(dfcity.info())
+duplicate_rows_df = dfcity[dfcity.duplicated()]
+print('Number of duplicate rows: ', duplicate_rows_df.shape)
+
+print('bed rooms')
+print(list(dfcity.room_bed.unique()))
+print('bath rooms')
+print(list(dfcity.room_bath.unique()))
+print('basement')
+print(*list(dfcity.basement.unique()))
+
+print(dfcity[dfcity.room_bed==33])
+
+dfcity['yr_sold']=dfcity['dayhours'].apply(lambda x:x[:4]).astype(int)
+# print(dfcity.head())
+
+dfcity['age_sold'] = dfcity.yr_sold - dfcity.yr_built
+# print(dfcity.head())
+
+dfcity.coast = pd.Categorical(dfcity.coast)
+dfcity.condition = pd.Categorical(dfcity.condition)
+dfcity.quality = pd.Categorical(dfcity.quality)
+dfcity.furnished = pd.Categorical(dfcity.furnished)
+dfcity.sight = pd.Categorical(dfcity.sight)
+
+# print(dfcity.info())
+
+print(dfcity.describe(include = 'all').T)
+
+Q1 = dfcity.room_bed.quantile(.25)
+Q3 = dfcity.room_bed.quantile(.75)
+IQR = Q3 - Q1
+lower_limit = Q1 - (1.5*IQR)
+upper_limit = Q3 + (1.5*IQR)
+print('Min value ', dfcity.room_bed.min())
+print('Max value ', dfcity.room_bed.max())
+print('Q1 ', Q1)
+print('Q3 ', Q3)
+print('IQR ', IQR)
+print('lower limit ', lower_limit)
+print('upper limit ', upper_limit)
+
+def FindOutliers(column):
+    outliers = [ ]
+    Q1 = column.quantile(.25)
+    Q3 = column.quantile(.75)
+    IQR = Q3-Q1
+    lower_limit = Q1 - (1.5*IQR)
+    upper_limit = Q3 + (1.5 * IQR)
+    for i in column:
+        if i<lower_limit or i>upper_limit:
+            outliers.append(i)
+    return np.array(outliers)
+
+print(len(FindOutliers(dfcity.room_bed)))
+
+print(len(FindOutliers(dfcity.room_bath)))
+
+print(len(FindOutliers(dfcity.living_measure)))
+
+
+visualisations
+sn.heatmap(dfcity.isnull(), cbar = False, yticklabels = False, cmap = 'viridis')
+
+
+def plotchart(col):
+    fix, (ax1, ax2) = plt.subplots(1,2, figsize = (7,5))
+    sn.boxplot(col, orient='v', ax = ax1)
+    ax1.set_ylabel = col.name
+    ax1.set_title = ('Box plot of {}'.format(col.name))
+    sn.displot(col, ax = ax2)
+    ax2.set_title('Distribution plot of {}'.format(col.name))
+def analysis_column(col):
+    print('count of outliers: ', len(FindOutliers(col)))
+    print('Mean: ', format(col.mean()))
+    print('Median: ', format(col.median()))
+    print('Missing values: ', format(col.isnull().sum()))
+    print('% of missing values ', format(round(100*(col.isnull()/len(col)),2)))
+
+    plotchart(col)
+
+print(analysis_column(dfcity.room_bed))
+
+fig, axes = plt.subplots(nrows = 2, ncols = 2, figsize = (7,5))
+axes[0,0].set_title('Box-room bed')
+axes[0,1].set_title('Distribution Plot -room bed')
+axes[1,0].set_title('Box living measure')
+axes[1,1].set_title('Distribution Plot -Living measure')
+
+sn.boxplot(dfcity.room_bed, orient='v', ax = axes[0,0])
+sn.displot(dfcity.room_bed, ax = axes[0,1])
+sn.boxplot(dfcity.living_measure, orient='v', ax = axes[1,0])
+sn.displot(dfcity.living_measure, ax = axes[1,1])
+
+print(dfcity.room_bed.hist())     the histogram
+
+print(dfcity.coast.value_counts())
+dfcity.coast.value_counts(normalize = True) #in percentage
+
+sn.factorplot('coast', data = dfcity, kind = 'count') #bar plot
+
+sn.factorplot('condition', data = dfcity, kind = 'count')
+
+print(dfcity.condition.value_counts())
+
+print(dfcity.quality.value_counts())
+
+sn.factorplot('quality', data = dfcity, kind = 'count') #for quality
+
+print(dfcity.yr_built.value_counts())
+pl = sn.factorplot('yr_built', data = dfcity, aspect = 4, kind = 'count')
+pl.set_xticklabels(step=5)
+
+sn.factorplot('yr_sold', data = dfcity, kind = 'count')
+
+corr = dfcity.corr(method='spearman') #set a variable to show the correlation of all variables compared
+plt.figure(figsize=(12,12)) #the size can change
+sn.heatmap(corr, vmax = .8, linewidths=0.01, square=True, annot=True, cmap='RdBu', linecolor='Black')
+
+sn.regplot(x=dfcity.room_bed, y=dfcity.price, color='g') #regression plot
+
+sn.regplot(x=dfcity.room_bath, y=dfcity.price, color='g')
+
+sn.regplot(x=dfcity.living_measure, y=dfcity.price, color='g')
+print(spearmanr(dfcity.living_measure, dfcity.price)) # finding the correlation btw living measure and price
+
+sn.barplot(x = dfcity.quality, y = dfcity.price)
+print(dfcity.quality)
+
+sn.barplot(x=dfcity.condition, y=dfcity.price)
+
+print('number of unique value: ', dfcity.age_sold.nunique())
+print('max number: ', dfcity.age_sold.max())
+
+dfcity['age_bin']=pd.cut(dfcity.age_sold, bins=[10,20,25,30,50,75,100,150])
+sn.barplot(x=dfcity.age_bin, y=dfcity.price)
+sn.barplot(x=dfcity.age_sold, y=dfcity.price)
+fig.tight_layout(); #this reduces the space inbetwewen the subplots
+print(plotchart(dfcity.room_b
+
+plt.show()
