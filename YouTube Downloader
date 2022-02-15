@@ -1,0 +1,45 @@
+from tkinter import*
+from pytube import YouTube
+import tkinter.messagebox
+root=Tk()
+root.geometry("450x300+0+0")
+root.resizable(width=False, height=False)
+root.title("Philips Youtube Downloader")
+root.configure(bg ="powder Blue")
+downloader = Frame(root)
+downloader.grid()
+def dExit():
+    dExit=tkinter.messagebox.askyesno("Philips Youtube Downloader", "Do you want to exit?")
+    if dExit>0:
+        root.destroy()
+        return
+link = StringVar()
+url_input = Entry(downloader, font= ("Arial", 20, "bold"),
+                  bg="powder blue", textvariable = link, bd = 30, width=30,
+                  justify =CENTER).grid(row = 0, column = 0, columnspan = 3, padx = 1)
+def clickToDownload():
+    try:
+        url = YouTube(str(link.get()))
+        video = url.streams.first()
+        video.download()
+        Label(downloader,font=("Arial", 20, "bold"),bg ="green", text = "Downloaded").grid(row = 0, column = 0)
+    except:
+        print("please enter a correct URL")
+
+#url_input.insert(0,"paste the link here")
+#url_input.bind("<FocusIn>", lambda args: url_input.delete('0', 'end'))
+#EntryLabel = Label(downloader, text = "Please enter the link below", font= ("Arial", 20, "bold")).grid(row=1, column = 0)
+
+#url_input = StringVar
+btnDownload = Button(downloader,text = "CLICK TO DOWNLOAD", highlightbackground="green", font=("Arial", 20, "bold"), width=20, height = 3,
+                   bd = 4, justify =CENTER, padx = 2, command = clickToDownload).grid(row=3, column = 0, columnspan = 4, pady=2)
+menubar = Menu(downloader)
+filemenu = Menu(menubar, tearoff = 0)
+menubar.add_cascade(label = "YouTube", menu=filemenu)
+#filemenu.add_command(label="Download", command= )
+filemenu.add_command(label = "Exit", command = dExit)
+
+
+
+root.config(menu=menubar)
+root.mainloop()
