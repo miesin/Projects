@@ -1,0 +1,728 @@
+CREATE DATABASE HR_Database;
+Source Real Life Projects/HR_Database.sql
+
+CREATE TABLE Regions(Regions_id int PRIMARY KEY, 
+                     Region_name varchar(25));
+
+INSERT INTO Regions VALUES(1,'North America'),
+                          (2,'Africa'),
+                          (3,'Europe'),
+                          (4,'Asia'),
+                          (5,'South America'),
+                          (6,'Oceania');
+#                         #(7,'New Brunswick'),
+                          #(8,'Pince Edward Island'),
+                          #(9,'Saskatchewan'),
+                          #(10,'Newfoundland and Labrador'); #(Regions_id, Region_name) 
+                            (11, 'California'),
+                            (12, 'New York'),
+                            (13, 'Manchester'),
+                            (14, 'London'),
+                            (15, 'Amsterdam'),
+                            (16, 'Rotterdam');
+                            
+CREATE TABLE Countries(Country_id char(2) PRIMARY KEY,
+                       Country_name varchar(40), 
+                       Regions_id int);
+INSERT INTO Countries VALUES#('CA', 'Canada', 1),
+                            ('US', 'United States', 1),
+                            ('ME', 'Mexico', 1),
+                            ('NG', 'Nigeria', 2),
+                            ('GH', 'Ghana', 2),
+                            ('SA', 'South Africa', 2),
+                            ('UK', 'United Kingdom', 3),
+                            ('NL', 'Netherlands', 3),
+                            ('GE', 'Germany', 3),
+                            ('CN', 'China', 4),
+                            ('IN', 'India', 4),
+                            ('SK', 'South Korea', 4),
+                            ('AG', 'Argentina', 5),
+                            ('BR', 'Brazil', 5),
+                            ('CO', 'Colombia', 5),
+                            ('AU', 'Australia', 6),
+                            ('SI', 'Solomon Islands', 6),
+                            ('NZ', 'New Zealand', 6);
+                            
+CREATE TABLE Locations(Location_id int PRIMARY KEY, 
+                       Street_address varchar(25),
+                       Postal_code varchar(12),
+                       City varchar(30),
+                       State_province varchar(12),
+                       country_id char(2));
+
+INSERT INTO Locations VALUES(1,'1600 Pennsylvania Ave','20500','Washington','District of Colombia','US'),
+                            (2,'540 Manning Ave', 'M6G 2V9', 'Toronto', 'Ontario','CA'),
+                            (3, 'Republic de Brasil 8', '06000', 'Mexico city', 'Mexico', 'ME'),
+                            (4, '26 McCarthy St.', '110024', 'Onikan', 'Lagos', 'NG'),
+                            (5, '13 Kwame St', '465AC', 'Accra', 'GAR', 'GH'),
+                            (6, '88 Pretoria Road','7637JH','Johannesburgh','Gauteng','SA'),
+                            (7, '2 Bolam House','NE4 6BT','Newcastle','Tyne & wear','UK'),
+                            (8, '628 Kantershof','1104HJ','Amsterdam','North Holland','NL'),
+                            (9, '44 Berlin Way','2205GE', 'Berlin', 'Berlin', 'GE'),
+                            (10, 'No. 99 Xihu Road', '510030', 'Guangzhou City','Yuexiu','CN'),
+                            (11, '3e-14, Nit', '121001', 'Delhi', 'Haryana', 'IN'),
+                            (12, '131-1, Gamjeon-dong','330221','Sasang-gu', 'Busan', 'SK'),
+                            (13, 'Rivadavia 1778', '40442', 'Corrientes', 'Corrientes', 'AG'),
+                            (14, 'Avenida Floresta 462', '69087-630', 'Manaus','Amazonas', 'BR'),
+                            (15, 'cr.28 b 38 b180', '2099-023', 'Medellín', 'Medellín', 'CO'),
+                            (16, '71 Warren Avenue', '2263', 'Barrabool', 'Victoria', 'AU'),
+                            (17, '23 Cottage St.','22203', 'Honiara','Guadalcanal','SI'),
+                            (18, '114 Ash Street', '4010', 'Inner Kati', 'Gisborne','NZ');
+                            
+CREATE TABLE Departments(Department_id int PRIMARY KEY, 
+                         Department_name varchar(30),
+                         Manager_id int,
+                         Location_id int);
+
+INSERT INTO Departments VALUES(1, 'Structures', 1, 1),
+                              (2, 'Structures', 2, 2),
+                              (3, 'Structures', 3, 3),
+                              (4, 'Structures', 4, 4),
+                              (5, 'Structures', 5, 5),
+                              (6, 'Structures', 6, 6),
+                              (7, 'Structures', 7, 7),
+                              (8, 'Structures', 8, 8),
+                              (9, 'Structures', 9, 9),
+                              (10, 'Structures', 10,10),
+                              (11, 'Structures', 11, 11),
+                              (12, 'Structures', 12, 12),
+                              (13, 'Structures', 13, 13),
+                              (14, 'Structures', 14, 14),
+                              (15, 'Structures', 15, 15),
+                              (16, 'Structures', 16, 16),
+                              (17, 'Structures', 17, 17),
+                              (18, 'Structures', 18, 18),
+                              
+                              (19, 'Environmental', 19, 1),
+                              (20, 'Environmental', 20, 2),
+                              (21, 'Environmental', 21, 3),
+                              (22, 'Environmental', 22, 4),
+                              (23, 'Environmental', 23, 5),
+                              (24, 'Environmental', 24, 6),
+                              (25, 'Environmental', 25, 7),
+                              (26, 'Environmental', 26, 8),
+                              (27, 'Environmental', 27, 9),
+                              (28, 'Environmental', 28,10),
+                              (29, 'Environmental', 29, 11),
+                              (30, 'Environmental', 30, 12),
+                              (31, 'Environmental', 31, 13),
+                              (32, 'Environmental', 32, 14),
+                              (33, 'Environmental', 33, 15),
+                              (34, 'Environmental', 34, 16),
+                              (35, 'Environmental', 35, 17),
+                              (36, 'Environmental', 36, 18),
+                              
+                              (37, 'Highway', 37, 1),
+                              (38, 'Highway', 38, 2),
+                              (39, 'Highway', 39, 3),
+                              (40, 'Highway', 40, 4),
+                              (41, 'Highway', 41, 5),
+                              (42, 'Highway', 42, 6),
+                              (43, 'Highway', 43, 7),
+                              (44, 'Highway', 44, 8),
+                              (45, 'Highway', 45, 9),
+                              (46, 'Highway', 46,10),
+                              (47, 'Highway', 47, 11),
+                              (48, 'Highway', 48, 12),
+                              (49, 'Highway', 49, 13),
+                              (50, 'Highway', 50, 14),
+                              (51, 'Highway', 51, 15),
+                              (52, 'Highway', 52, 16),
+                              (53, 'Highway', 53, 17),
+                              (54, 'Highway', 54, 18),
+             
+                              (55, 'Geotechnics', 55, 1),
+                              (56, 'Geotechnics', 56, 2),
+                              (57, 'Geotechnics', 57, 3),
+                              (58, 'Geotechnics', 58, 4),
+                              (59, 'Geotechnics', 59, 5),
+                              (60, 'Geotechnics', 60, 6),
+                              (61, 'Geotechnics', 61, 7),
+                              (62, 'Geotechnics', 62, 8),
+                              (63, 'Geotechnics', 63, 9),
+                              (64, 'Geotechnics', 64,10),
+                              (65, 'Geotechnics', 65, 11),
+                              (66, 'Geotechnics', 66, 12),
+                              (67, 'Geotechnics', 67, 13),
+                              (68, 'Geotechnics', 68, 14),
+                              (69, 'Geotechnics', 69, 15),
+                              (70, 'Geotechnics', 70, 16),
+                              (71, 'Geotechnics', 71, 17),
+                              (72, 'Geotechnics', 72, 18);
+update Departments set Department_name='Structures' where Department_id=18;
+
+CREATE TABLE Employees(Employee_id int PRIMARY KEY, 
+                       First_name varchar(20),
+                       Last_name varchar(25),
+                       Email varchar(25),
+                       Phone_number varchar(20),
+                       Hire_date date,
+                       Job_id varchar(10),
+                       Salary int,
+                       Commission_PCT int,
+                       Manager_id int,
+                       Department_id int);
+https://names.igopaygo.com/people/email
+INSERT INTO Employees VALUES
+(1,'Helena','Stoll','helst@egl-inc.info', '6478462745', '2011-04-01', '123AD', 90000,10,1,1),
+(2,'Binda','Yip','bindayi@arvinmeritor.info', '6478462647', '2012-04-11', '123BC', 80000,20,2,2),
+(3,'Ince','Magoon','in.magoon@autozone-inc.info', '6478462657', '2013-04-21', '123CD', 95000,11,3,3),
+(4,'Carna','Bass','carna_bas@egl-inc.info', '6478462123', '2016-05-07', '123AD', 70000,13,4,4),
+(5,'Amund','Maddux','amundma@arvinmeritor.info', '6478462900', '2019-06-01', '123CD', 70000,14,5,5),
+(6,'Taylar','Fairley','ta_fairle@diaperstack.com', '6478462890', '2018-02-11', '123BC', 65000,13,6,6),
+(7,'Sencer','Traxler','se.trax@autozone-inc.info', '6478462357', '2017-01-01', '123BC', 100000,10,7,7),
+(8,'Corina','Jensen','cori_jens@progressenergyinc.info','6478462745', '2011-04-01', '123AD', 90000,10,8,8),
+(9,'Cyric','Lowry','cylowry@arketmay.com', '6478462267', '2011-04-27', '123CD', 800000,10,9,9),
+(10,'Cyric','Chin','cyrich@arvinmeritor.info', '6478462745', '2011-04-01', '123EC',90000,13,10,10),
+(11,'Joyanne','Rohn','joya-rohn@careful-organics.org', '6478462745', '2011-04-01','123AD', 90000,10,11,11),
+(12,'Chavi','Nolte','chanolte@progressenergyinc.info', '6477462647', '2012-04-22','123BC', 80000,20,12,12),
+(13,'Geordie','Chin','geordie.ch@arketmay.com', '6478462677', '2013-04-21', '123EC', 95000,11,13,13),
+(14,'Zara','Macarthur','zar-macart@consol-research.net','6479462123','2016-05-07','123AD', 70000,13,14,14),
+(15,'Delbert','Stemple','delbert-stemp@carful-orga.org','6478462901','2019-08-01','123EC', 70000,14,15,15),
+(16,'Severn','Stoll','sev.st@progressenergyinc.info','6478462745', '2011-04-01', '123AD', 90000,10,16,16),
+(17,'Neale','Langlois','ne-langlois@diaperstack.com', '6478562267','2021-04-17', '123BC', 800000,10,17,17),
+(18,'Ingemar','Hintze','ingemar.hin@egl-inc.info', '6478462745', '2011-04-01', '123AD', 90000,10,18,18),
+(19,'Abrienda','Victorino','abrie-vic@conresearch.net', '6478462647','2012-04-11','123BC', 80000,20,19,19),
+(20,'Trude','Nair','trna@arketmay.com', '6478462657', '2013-04-21', '123CD', 95000,11,20,20),
+(21,'Magdalene','Dilley','magd-dille@autozone-inc.info','6478462123','2016-05-07', '123AD',70000,13,21,21),
+(22,'Gwyn','Crick','gwy-cri@progressenergyinc.info', '6478462900', '2019-06-01', '123CD', 70000,14,22,22),
+(23,'Young','Almeida','you_almeida@careful-organics.org','6478462890','2018-02-11','123BC',65000,13,23,23),
+(24,'Vitoz','Curtis','vito.cur@arvinmeritor.info', '6478462357', '2017-01-01', '123BC', 100000,10,24,24),
+(25,'Danny','Ingersoll','dan-in@arketmay.com','6478462745', '2011-04-01', '123AD', 90000,10,25,25),
+(26,'Filip','Mcduffie','filip.mcduf@egl-inc.info','6478462267', '2011-04-27', '123CD', 800000,10,26,26),
+(27,'Galatea','Haun','gal-haun@arvinmeritor.info', '6478462745', '2011-04-01', '123EC',90000,13,27,27),
+(28,'Sajili','Yin','saji.yin@careful-organics.org', '6478462745', '2011-04-01','123AD', 90000,10,28,28),
+(29,'Latif','Lyda','lat.lyd@acusage.net', '6477462647', '2012-04-22','123BC', 80000,20,29,29),
+(30,'Tahirah','Leite','tahir.lei@arketmay.com', '6478462677', '2013-04-21', '123EC', 95000,11,30,30),
+(31,'Alasdair','Huddleston','alasdair-hu@arketmay.com','6479462123','2016-05-07','123AD', 70000,13,31,31),
+(32,'Isadora','Boutin','isado_bouti@arvinmeritor.info','6478462901','2019-08-01','123EC', 70000,14,32,32),
+(33,'Roseanne','Fries','rose.frie@acusage.net','6478462745', '2011-04-01', '123AD', 90000,10,33,33),
+(34,'Dietlinde','Hoban','diethoba@arvinmeritor.info','6478562267','2021-04-17', '123BC', 800000,10,34,34),
+(35,'Court','Polito','court_po@autozone-inc.info', '6478462745', '2011-04-01', '123AD', 90000,10,35,35),
+(36,'Angelina','Ingersoll','ange.in@diaperstack.com', '6478462745', '2011-04-01', '123AD', 90000,10,36,36),
+(37,'Erastus','Boutin','era.bouti@careful-organics.org','6478462647','2012-04-11','123BC', 80000,20,37,37),
+(38,'Damek','Palumbo','damekpa@egl-inc.info','6478462123','2016-05-07', '123AD',70000,13,38,38),
+(39,'Sahar','Sherwood','saha_sh@arketmay.com', '6478462900', '2019-06-01', '123CD', 70000,14,39,39),
+(40,'Eliska','Oxendine','elis_oxend@arketmay.com', '6478462357', '2017-01-01', '123BC', 100000,10,40,40),
+(41,'Summer','Vazquez','summvazqu@egl-inc.info','6478462745', '2011-04-01', '123AD', 90000,10,41,41),
+(42,'Jeanette','Katz','jeane.kat@careful-organics.org','6478462745', '2011-04-01', '123EC',90000,13,42,42),
+(43,'Brae','Rossiter','bra.ros@arketmay.com', '6478462745', '2011-04-01', '123EC',90000,13,43,43),
+(44,'Jaya','Gainer','jaygain@arketmay.com', '6478462647', '2012-04-22','123BC', 80000,20,44,44),
+(45,'Chrissy','Huddleston','chrissy.hud@auto-inc.info','6478462677','2013-04-21','123EC', 95000,11,45,45),
+(46,'Zelotes','Longenecker','zelot-long@arketmay.com', '6478462745', '2011-04-01','123AD', 90000,10,46,46),
+(47,'Heater','Knorr','hekno@autozone-inc.info', '6478462745', '2011-04-01', '123AD', 90000,10,47,47),
+(48,'Sajili','Bourke','sajil.bourk@care-organics.org','6478462647','2012-04-11','123BC', 80000,20,48,48),
+(49,'Lawford','Chadwick','law-chad@arvinmeritor.info','6478462123','2016-05-07', '123AD',70000,13,49,49),
+(50,'Lavender','Munn','lavender.mu@care-organics.org','6478462900', '2019-06-01', '123CD', 70000,14,50,50),
+(51,'Kara','Pirtle','karpi@consolid-research.net', '6478462357', '2017-01-01', '123BC', 100000,10,51,51),
+(52,'Aliya','Subramanian','al_subrama@diaperstack.com','6478462745', '2011-04-01','123AD', 90000,10,52,52),
+(53,'Araluen','Simonton','aral.si@autozone-inc.info','6478462745', '2011-04-01', '123EC',90000,13,53,53),
+(54,'Raquelle','Toomey','raquelle-toomey@research.net','6478462745','2011-04-01', '123EC',90000,13,54,54),
+(55,'Bowman','Regis','bowreg@egl-inc.info', '6478462745', '2011-04-01', '123AD', 90000,10,55,55),
+(56,'Myall','Haun','myall.haun@autozone-inc.info','6478462647','2012-04-11','123BC', 80000,20,56,56),
+(57,'Eldridge','Borst','eld-borst@con-research.net','6478462123','2016-05-07', '123AD',70000,13,57,57),
+(58,'Marvyn','Geissler','marvyn_geissl@meritor.info','6478462900', '2019-06-01', '123CD', 70000,14,58,58),
+(59,'Chevy','Hutchings','chev-hu@acusage.net','6478462745', '2011-04-01','123AD', 90000,10,59,59),
+(60,'Ayiana','Allard','ay_all@arvinmeritor.info','6478462745', '2011-04-01', '123EC',90000,13,60,60),
+(61,'Angelina','Vanatta','angeli_vanatt@acusage.net', '6478462745', '2011-04-01', '123AD', 90000,10,61,61),
+(62,'Valeray','Dement','valer_dem@autozone-inc.info','6478462123','2016-05-07', '123AD',70000,13,62,62),
+(63,'Levina','Willett','levina.willet@con-research.net','6478462123','2016-05-07', '123AD',70000,13,63,63),
+(64,'Klemens','Hartshorn','kle.hartshorn@zone-inc.info','6478462745','2011-04-01','123AD', 90000,10,64,64),
+(65,'Enzo','Haman','en.ha@diaperstack.com', '6478462745', '2011-04-01', '123AD', 90000,10,65,65),
+(66,'Whitney','Borst','whitn.bors@autozone-inc.info','6478462677','2013-04-21','123EC', 95000,11,66,66),
+(67,'Eldridge','English','eldridg-english@egl-inc.info','6478462745','2011-04-01','123AD', 90000,10,67,67),
+(68,'Sarisha','Holman','sari-holman@cons-research.net','6478462745', '2011-04-01', '123EC',90000,13,68,68),
+(69,'Brittnee','Loesch','britt.loe@autozone-inc.info','6478462745', '2011-04-01', '123EC',90000,13,69,69),
+(70,'Airlia','Sebring','airl-se@autozone-inc.info','6478462745', '2011-04-01','123AD', 90000,10,70,70),
+(71,'Brianne','Pirtle','bria_pir@autozone-inc.info','6478462745', '2011-04-01', '123EC',90000,13,71,71),
+(72,'Alistair','Furman','alis.furma@arketmay.com', '6478462647', '2012-04-22','123BC', 80000,20,72,72);
+
+                            
+
+CREATE TABLE Job_history(Employee_id int,
+                         Start_date date,
+                         End_date date,
+                         Job_id varchar(10),
+                         Department_id int);
+
+INSERT INTO Job_history VALUES 
+(	1,	'2020-04-24',	'2022-05-04',	'123AD',	1	),
+(	2,	'2020-01-20',	'2022-11-08',	'123CD',	2	),
+(	3,	'2020-01-31',	'2022-07-12',	'123BC',	3	),
+(	4,	'2020-10-06',	'2022-11-18',	'123EC',	4	),
+(	5,	'2020-07-17',	'2022-07-01',	'123AD',	5	),
+(	6,	'2020-05-06',	'2022-03-22',	'123CD',	6	),
+(	7,	'2020-07-10',	'2022-03-22',	'123BC',	7	),
+(	8,	'2020-12-14',	'2022-12-15',	'123EC',	8	),
+(	9,	'2020-09-04',	'2022-10-19',	'123AD',	9	),
+(	10,	'2020-01-15',	'2022-06-15',	'123CD',	10	),
+(	11,	'2020-06-05',	'2022-03-08',	'123BC',	11	),
+(	12,	'2020-03-16',	'2022-04-29',	'123EC',	12	),
+(	13,	'2020-02-03',	'2022-01-28',	'123AD',	13	),
+(	14,	'2020-04-28',	'2022-06-08',	'123CD',	14	),
+(	15,	'2020-08-12',	'2022-09-13',	'123BC',	15	),
+(	16,	'2020-10-15',	'2022-11-29',	'123EC',	16	),
+(	17,	'2020-01-03',	'2022-01-06',	'123AD',	17	),
+(	18,	'2020-06-04',	'2022-07-11',	'123CD',	18	),
+(	19,	'2020-03-06',	'2022-02-03',	'123BC',	19	),
+(	20,	'2020-07-20',	'2022-02-02',	'123EC',	20	),
+(	21,	'2020-07-24',	'2022-10-24',	'123AD',	21	),
+(	22,	'2020-07-30',	'2022-11-17',	'123CD',	22	),
+(	23,	'2020-01-22',	'2022-09-21',	'123BC',	23	),
+(	24,	'2020-07-09',	'2022-05-13',	'123EC',	24	),
+(	25,	'2020-07-15',	'2022-06-27',	'123AD',	25	),
+(	26,	'2020-05-14',	'2022-11-10',	'123CD',	26	),
+(	27,	'2020-01-30',	'2022-07-28',	'123BC',	27	),
+(	28,	'2020-11-09',	'2022-05-27',	'123EC',	28	),
+(	29,	'2020-03-18',	'2022-02-10',	'123AD',	29	),
+(	30,	'2020-12-09',	'2022-01-27',	'123CD',	30	),
+(	31,	'2020-06-02',	'2022-03-17',	'123BC',	31	),
+(	32,	'2020-05-11',	'2022-02-11',	'123EC',	32	),
+(	33,	'2020-01-01',	'2022-04-18',	'123AD',	33	),
+(	34,	'2020-12-02',	'2022-10-17',	'123CD',	34	),
+(	35,	'2020-09-30',	'2022-12-06',	'123BC',	35	),
+(	36,	'2020-12-04',	'2022-05-26',	'123EC',	36	),
+(	37,	'2020-03-12',	'2022-03-28',	'123AD',	37	),
+(	38,	'2020-06-12',	'2022-07-21',	'123CD',	38	),
+(	39,	'2020-08-25',	'2022-11-15',	'123BC',	39	),
+(	40,	'2020-11-20',	'2022-04-13',	'123EC',	40	),
+(	41,	'2020-10-21',	'2022-02-15',	'123AD',	41	),
+(	42,	'2020-02-07',	'2022-10-20',	'123CD',	42	),
+(	43,	'2020-08-10',	'2022-08-03',	'123BC',	43	),
+(	44,	'2020-10-08',	'2022-10-26',	'123EC',	44	),
+(	45,	'2020-07-15',	'2022-10-11',	'123AD',	45	),
+(	46,	'2020-10-26',	'2022-09-28',	'123CD',	46	),
+(	47,	'2020-11-03',	'2022-07-21',	'123BC',	47	),
+(	48,	'2020-05-04',	'2022-08-10',	'123EC',	48	),
+(	49,	'2020-03-04',	'2022-03-17',	'123AD',	49	),
+(	50,	'2020-03-20',	'2022-05-10',	'123CD',	50	),
+(	51,	'2020-06-19',	'2022-11-22',	'123BC',	51	),
+(	52,	'2020-06-09',	'2022-02-15',	'123EC',	52	),
+(	53,	'2020-02-18',	'2022-10-07',	'123AD',	53	),
+(	54,	'2020-05-18',	'2022-06-24',	'123CD',	54	),
+(	55,	'2020-11-05',	'2022-10-03',	'123BC',	55	),
+(	56,	'2020-05-22',	'2022-03-14',	'123EC',	56	),
+(	57,	'2020-06-18',	'2022-08-01',	'123AD',	57	),
+(	58,	'2020-05-06',	'2022-03-22',	'123CD',	58	),
+(	59,	'2020-07-31',	'2022-04-13',	'123BC',	59	),
+(	60,	'2020-04-01',	'2022-02-11',	'123EC',	60	),
+(	61,	'2020-11-20',	'2022-01-03',	'123AD',	61	),
+(	62,	'2020-04-08',	'2022-04-22',	'123CD',	62	),
+(	63,	'2020-06-16',	'2022-04-08',	'123BC',	63	),
+(	64,	'2020-07-09',	'2022-02-24',	'123EC',	64	),
+(	65,	'2020-04-23',	'2022-10-03',	'123AD',	65	),
+(	66,	'2020-10-21',	'2022-11-30',	'123CD',	66	),
+(	67,	'2020-06-30',	'2022-03-23',	'123BC',	67	),
+(	68,	'2020-10-22',	'2022-10-13',	'123EC',	68	),
+(	69,	'2020-05-11',	'2022-10-25',	'123AD',	69	),
+(	70,	'2020-12-04',	'2022-03-15',	'123CD',	70	),
+(	71,	'2020-11-27',	'2022-07-19',	'123BC',	71	),
+(	72,	'2020-11-12',	'2022-09-09',	'123EC',	72	);
+
+
+
+
+
+CREATE TABLE Jobs(Job_id varchar(10),
+                  Job_title varchar(35),
+                  Min_salary int,
+                  Max_salary int);
+
+INSERT INTO Jobs VALUES
+('123AD',  'Lakowe Infrastructure',90000,200000),
+('123CD',	'Jahi Roads Project',80000,150000),
+('123BC',	'Udi Hills wastewater plant',75000,170000),
+('123EC',	'Aja water plant',100000,250000),
+('123AD',	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000	),
+('123EC'	,	'Aja water plant'	,	100000,	250000	),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000	),
+('123EC'	,	'Aja water plant'	,	100000,	250000	),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000	),
+('123EC'	,	'Aja water plant'	,	100000,	250000	),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000	),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000	),
+('123EC'	,	'Aja water plant'	,	100000,	250000	),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000	),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000	),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000	),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000	),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'    ,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000	),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000),
+('123AD'	,	'Lakowe Infrastructure'	,	90000,	200000),
+('123CD'	,	'Jahi Roads Project'	,	80000,	150000	),
+('123BC'	,	'Udi Hills wastewater plant'	,	75000,	170000),
+('123EC'	,	'Aja water plant'	,	100000,	250000	);
+#
+ 
+ 
+ CREATE TABLE Job_grades(Grade_level varchar(2),
+                        Lowest_salary int,
+                        Highest_salary int);                     
+
+INSERT INTO Job_grades VALUES
+            ('G5', 85000, 120000),
+            ('G4', 80000, 100000),
+            ('G6', 90000, 150000),
+            ('G8', 120000, 200000);
+
+https://random-date-generator.com/homepage/results
+
+Select First_name as 'First Name', Last_name as 'Last Name' FROM Employees;
+SELECT DISTINCT Department_id FROM Employees;
+
+SELECT * FROM Employees;
+
+Write a query to get the names (first_name, last_name), salary, PF of all the employees (PF is calculated as 15% of salary)
+SELECT First_name, Last_name, Salary, (0.15*Salary) as PF from Employees;
+
+
+Write a query to get the employee ID, names (first_name, last_name), salary in ascending order of salary
+SELECT Employee_id, First_name, Last_name, Salary FROM Employees ORDER BY Salary ASC;
+
+Write a query to get the total salaries payable to employees
+SELECT SUM(Salary) from Employees;
+SELECT MAX(Salary) as Maximum_Salary, MIN(Salary) as Minimum_Salary from Employees;
+
+Write a query to get the average salary and number of employees in the employees table
+SELECT AVG(Salary) as Average_Salary, COUNT(Employee_id) as Number_of_Employee FROM Employees;
+
+Write a query to get the number of jobs available in the employees
+SELECT COUNT(DISTINCT(Job_id)) FROM Employees;
+
+Write a query get all first name from employees table in upper case
+SELECT UPPER(First_name) from Employees; 
+
+Write a query to get the first 3 characters of first name from employees table
+SELECT substring(First_name,1,3) from Employees LIMIT 5;
+
+ Write a query to get the names (for example Ellen Abel, Sundar Ande etc.) of all the employees from employees table
+SELECT concat(First_name, ' ', Last_name) as Names from Employees;
+
+Write a query to get first name from employees table after removing white spaces from both side
+SELECT trim(First_name) from Employees;
+
+Write a query to check if the first_name fields of the employees table contains numbers
+Select * from Employees where First_name REGEXP '[0-9]';
+
+Write a query to get monthly salary (round 2 decimal places) of each and every employee
+SELECT round(Salary/12, 2) from Employees;
+
+Write a query to display the name (first_name, last_name) and salary for all employees whose salary is not in the range $10,000 through $15,000
+SELECT First_name, Last_name, Salary from Employees where Salary not BETWEEN 90000 and 150000;
+
+Write a query to display the name (first_name, last_name) and department ID of all employees in departments 30 or 100 in ascending order
+SELECT First_name,
+       Last_name, 
+       Department_id 
+       from Employees 
+       where Department_id in(45,56) order by Department_id ASC;
+
+Write a query to display the name (first_name, last_name) and salary for all employees whose salary is not in the range $10,000 through $15,000 and are in department 30 or 100
+Select First_name, 
+       Last_name, 
+       Salary 
+       from Employees 
+       where Salary not BETWEEN 65000 and 90000 
+       and Department_id in(65,27,44);
+
+Write a query to display the name (first_name, last_name) and hire date for all employees who were hired in 1987
+SELECT First_name, Last_name, Hire_date 
+FROM Employees WHERE Hire_date LIKE '2011%';
+
+Write a query to display the first_name of all employees who have both "b" and "c" in their first name
+SELECT First_name 
+       from Employees where First_name LIKE '%b%' and First_name LIKE '%c%';
+
+
+ Write a query to display the last name, job, and salary for all employees whose job is that of a Programmer or a Shipping Clerk, and whose salary is not equal to $4,500, $10,000, or $15,000 (in my own case where i put in different data the difference is indicated below)
+SELECT Last_name, Job_id, Salary 
+from Employees 
+where Job_id in('123AD', '123EC')
+AND Salary not in(65000, 90000, 100000);
+
+ Write a query to display the last name of employees whose names have exactly 6 characters.
+ SELECT Last_name from Employees where Length(Last_name)=6;
+ SELECT Last_name from Employees where Last_name LIKE '______';
+
+Write a query to display the last name of employees having 'e' as the third character
+SELECT Last_name FROM Employees where Last_name LIKE '__e%';
+
+Write a query to display the jobs/designations available in the employees table
+Select DISTINCT Job_id from Employees;
+  
+Write a query to display the name (first_name, last_name), salary and PF (15% of salary) of all employees. 
+SELECT First_name, Last_name, Salary, (0.15*Salary) as PF from Employees;
+
+Write a query to select all record from employees where last name in 'BLAKE', 'SCOTT', 'KING' and 'FORD'
+Select * from Employees where Last_name in('DEMENT', 'HAMAN', 'FURMAN', 'ALLARD');
+  
+Write a query to get the number of employees with the same job
+SELECT Job_id, COUNT(*) from Employees GROUP BY Job_id;
+
+Write a query to find the manager ID and the salary of the lowest-paid employee for that manager
+Select Manager_id, Min(Salary) from Employees GROUP BY Manager_id;
+
+Write a query to get the department ID and the total salary payable in each department
+SELECT Department_id, SUM(Salary) from Employees GROUP BY  Department_id;
+
+Write a query to get the job ID and maximum salary of the employees where maximum salary is greater than or equal to $4000.
+Select Job_id, Max(Salary) from Employees GROUP By Job_id having Max(Salary)>=150000
+
+Write a query to get the average salary for all departments employing more than 10 employees
+our own data does not fit this query 
+select department_id, AVG(salary) from employees GROUP BY department_id having COUNT(department_id)>10
+
+Write a query to find the name (first_name, last_name) and the salary of the employees who have a higher salary than the employee whose last_name='Dement'.
+SELECT First_name, Last_name, Salary from Employees where Salary > (select Salary from Employees where Last_name = 'Dement');
+
+Write a query to find the name (first_name, last_name) of all employees who works in the IT department (in theis case structures)
+SELECT First_name, Last_name from Employees WHERE Department_id  in(SELECT Department_id from Departments where Department_name = 'Structures');
+
+Write a query to find the name (first_name, last_name) of the employees who have a manager(is it who are both managers and employees?) and worked in a USA based department
+SELECT First_name, Last_name from Employees 
+               where Manager_id is NOT NUll and 
+               Department_id in(SELECT Department_id from Departments 
+               WHERE Location_id in(Select Location_id from Locations 
+               WHERE Country_id = 'US'));
+SELECT First_name, Last_name from Employees 
+               where Manager_id in (Select Employee_id from Employees 
+               WHERE Department_id in(SELECT Department_id from Departments 
+               WHERE Location_id in(Select Location_id from Locations 
+               WHERE Country_id = 'US')));
+
+Write a query to find the name (first_name, last_name) of the employees who are managers
+(this is not applicable to our dataset)
+Select First_name, Last_name from Employees where Employee_id in(SELECT Manager_id FROM Departments);
+
+Write a query to find the name (first_name, last_name), and salary of the employees whose salary is greater than the average salary
+SELECT First_name, Last_name, Salary FROM Employees where Salary > (SELECT AVG(Salary) FROM Employees);
+
+Write a query to find the name (first_name, last_name), and salary of the employees whose salary is equal to the minimum salary for their job grade
+SELECT First_name, Last_name, Salary FROM Employees 
+        WHERE Employees.Salary = (Select Min(Min_salary) from Jobs 
+                        WHERE Jobs.Job_id = Employees.Job_id); 
+BELOW IS THE ORIGINAL QUERY WHICH DOES NOT WORK IN OUR CASE.
+SELECT First_name, Last_name, Salary 
+FROM Employees 
+WHERE Employees.Salary = (SELECT Min_salary
+FROM Jobs
+WHERE Employees.Job_id = Jobs.Job_id);
+
+Write a query to find the name (first_name, last_name), and salary of the employees who earns more than the average salary and works in any of the IT departments
+THIS WILL NOT WORK IN OUR CASE, BUT HERE IS THE QUERY
+Select First_name, Last_name, Salary FROM Employees
+WHERE Salary > (Select AVG(Salary) from Employees) and Department_id 
+in(SELECT Department_id FROM Departments WHERE Department_name LIKE '%Struc%');
+
+Write a query to find the name (first_name, last_name), and salary of the employees who earns more than the earning of Mr. Bell
+Select First_name, Last_name, Salary from employees 
+WHERE Salary > 
+(SELECT Salary FROM Employees WHERE Last_name = 'Yip') ORDER By First_name;
+
+Write a query to find the name (first_name, last_name), and salary of the employees who earn the same salary as the minimum salary for all departments
+SELECT First_name, Last_name, Salary FROM Employees 
+WHERE Salary = (Select Min(Salary) from Employees);
+
+Write a query to find the name (first_name, last_name), and salary of the employees whose salary is greater than the average salary of all departments
+SELECT First_name, Last_name, Salary FROM Employees 
+WHERE Salary > ALL(Select AVG(Salary) from Employees GROUP By Department_id);
+
+Write a query to find the name (first_name, last_name) and salary of the employees who earn a salary that is higher than the salary of all the Shipping Clerk (JOB_ID = 'SH_CLERK') in our case Geotecnics. Sort the results of the salary of the lowest to highest
+SELECT First_name, Last_name, Salary FROM Employees 
+where Salary > ALL(Select Salary FROM Employees where Job_id = '123AD') ORDER BY Salary ASC;
+All here easily replaces the use of MAX(Salary)
+
+Write a query to find the name (first_name, last_name) of the employees who are not supervisors
+Select First_name, Last_name FROM Employees 
+where Employee_id not in (SELECT Manager_id from Employees);
+This returns an empty set in our case.
+
+Write a query to display the employee ID, first name, last name, and department names of all employees
+SELECT Employee_id, First_name, Last_name, Department_name FROM Employees JOIN Departments 
+ON Employees.Department_id=Departments.Department_id;
+
+SELECT Employee_id, First_name, Last_name, 
+(Select Department_name FROM Departments 
+where Departments.Department_id = Employees.Department_id) as Departments
+FROM Employees;
+
+Write a query to display the employee ID, first name, last name, salary of all employees whose salary is above average for their departments
+Select Employee_id, First_name, Last_name, Salary  FROM Employees WHERE 
+Salary > (SELECT AVG(Salary) FROM Employees where Department_id = Employees.Department_id) 
+
+Write a query to fetch even numbered records from employees table
+Select Employee_id, First_name, Last_name from Employees where Employee_id%2 !=0;
+
+Write a query to find the 5th maximum salary in the employees table
+SELECT Distinct Salary from Employees ORDER BY Salary DESC LIMIT 1 OFFSET 4;
+
+Write a query to find the 4th minimum salary in the employees table
+SELECT Distinct Salary from Employees ORDER BY Salary ASC LIMIT 1 OFFSET 3;
+
+Write a query to select last 10 records from a table
+SET @i = (SELECT (Count(*) from Employees));
+Select Employee_id, First_name, Last_name FROM 
+(Select Employee_id, First_name, Last_name From Employees ORDER BY Employee_id DESC Limit 10) as sub
+ORDER BY Employee_id ASC; 
+
+Write a query to list the department ID and name of all the departments where no employee is working
+this doesnt work in our case but here is it
+SELECT Department_id, Department_name from Departments
+WHERE Department_id not in (Select Department_id from Employees); 
+
+Write a query to get 3 maximum salaries
+Select Salary as Maxima from Employees ORDER BY Salary ASC limit 3;
+
+Write a query to get 3 minimum salaries
+Select Salary as Maxima from (Select DISTINCT Salary from Employees ORDER BY Salary ASC limit 3) as b 
+ORDER BY Salary DESC;
+
+Write a query to get nth max salaries of employees
+SELECT *
+FROM employees emp1
+WHERE (1) = (
+SELECT COUNT(DISTINCT(emp2.salary))
+FROM employees emp2
+WHERE emp2.salary > emp1.salary);
+
+Write a query to find the addresses (location_id, street_address, city, state_province, country_name) of all the departments
+Select Location_id, Street_address, City, State_province, Country_name 
+from Countries JOIN Locations ON Locations.Country_id = Countries.Country_id; OR 
+Select Location_id, Street_address, City, State_province, Country_name 
+from Countries NATURAL JOIN Locations;
+
+Write a query to find the name (first_name, last name), department ID and name of all the employees
+Select First_name, Last_name, Department_name, Department_id FROM Employees JOIN Departments
+USING (Department_id); -- ON Employees.Department_id = Departments.Department_id;
+
+Write a query to find the name (first_name, last_name), job, department ID and name of the employees who works in London
+Select e.First_name, e.Last_name, e.Job_id, e.Department_id, Department_name  
+From Employees e 
+JOIN Departments 
+ON e.Department_id = Departments.Department_id 
+JOIN Locations 
+ON Departments.Location_id = Locations.Location_id
+WHERE Locations.City = 'Newcastle';
+
+Write a query to find the employee id, name (last_name) along with their manager_id and name (last_name).
+Select e.Employee_id AS EM_ID, e.Last_name AS EM_LN, m.Employee_id AS MG_ID, m.Last_name AS MNGER
+FROM Employees e join Employees m ON m.Employee_id = e.Manager_id;
+
+Write a query to find the name (first_name, last_name) and hire date of the employees who was hired after 'Jones'
+Select e.First_name, e.Last_name, e.Hire_date 
+From Employees e JOIN Employees MUN ON MUN.Last_name = 'Munn'
+where e.Hire_date > MUN.Hire_date;
+
+Write a query to get the department name and number of employees in the department
+SELECT Department_name, COUNT(Employees.Department_id) as No_of_Employees 
+FROM Departments 
+JOIN Employees 
+ON Departments.Department_id = Employees.Department_id 
+GROUP BY Departments.Department_name, Department_name
+ORDER BY Department_name;
+
+Write a query to find the employee ID, job title, number of days between ending date and starting date for all jobs in department 90 (Structures)
+SELECT Employee_id, Job_title, DATEDIFF(End_date, Start_date) 
+FROM Job_history 
+INNER JOIN Jobs 
+ON Job_history.Job_id = Jobs.Job_id
+WHERE Department_id = 4;
+
+Write a query to display the department ID and name and first name of manager
+SELECT e.Department_id, d.Department_name, d.Manager_id, e.Last_name 
+FROM Departments d INNER JOIN Employees e 
+ON e.Manager_id = d.Manager_id;
+
+Write a query to display the department name, manager name, and city
+Select d.Department_name, e.First_name, e.Last_name, l.City 
+FROM Employees e JOIN Departments d ON e.Department_id = d.Department_id
+JOIN Locations l ON d.Location_id = l.Location_id
+WHERE e.Employee_id = d.Manager_id;
+OR
+Select d.department_name, e.first_name, e.last_name, l.city 
+FROM employees e JOIN departments d ON e.Employee_id = d.Manager_id
+JOIN locations l ON d.location_id = l.location_id
+
+Write a query to display the job title and average salary of employees
+SELECT Job_title, AVG(Salary) FROM Employees JOIN Jobs
+GROUP BY Job_title;
+
+Write a query to display job title, employee name, and the difference between salary of the employee and minimum salary for the job
+SELECT Job_title, First_name, Salary - Min_salary 
+FROM Employees NATURAL JOIN Jobs;  
+
+ Write a query to display the job history that were done by any employee who is currently drawing more than 10000 of salary
+Select Job_history.* FROM Job_history 
+LEFT JOIN Employees 
+ON Employees.Employee_id = Job_history.Employee_id 
+where Salary > 100000 ; 
+
+Write a query to display department name, name (first_name, last_name), hire date, salary of the manager for all managers whose experience is more than 15 years
+SELECT Department_name, First_name, Last_name, Hire_date, Salary, 
+(DATEDIFF(NOW(),Hire_date))/365 as DIFF
+FROM Employees JOIN Departments 
+ON Employees.Employee_id = Departments.Manager_id
+WHERE (DATEDIFF(NOW(),Hire_date))/365 > 6;
+
+Write a query to get the distinct Mondays from hire_date in employees tables.
+SELECT DISTINCT DAYNAME(Hire_date) FROM Employees where DAYNAME(Hire_date) = 'Monday'; 
+
+
+
+
+
+
+
+
+
+
+
